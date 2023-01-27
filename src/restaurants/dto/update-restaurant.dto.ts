@@ -18,7 +18,7 @@ export class UpdateRestaurantDto {
     readonly email: string
 
     @IsOptional()
-    @IsPhoneNumber()
+    @IsPhoneNumber('US')
     readonly phoneNo: number
 
     @IsOptional()
