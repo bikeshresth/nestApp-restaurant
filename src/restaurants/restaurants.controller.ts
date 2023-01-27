@@ -1,22 +1,26 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { createRestaurantDto } from './dto/create.restaurant.dto';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { CreateRestaurantDto } from './dto/create.restaurant.dto';
+import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
 import { RestaurantsService } from './restaurants.service';
 import { Restaurant } from './schemas/restaurants.schema';
-
+import { Query as ExpressQuery } from 'express-serve-static-core'
 @Controller('restaurants')
 export class RestaurantsController {
     constructor(private restaurantsService: RestaurantsService) { }
 
 
     @Get()
-    async getAllRestaurants(): Promise<Restaurant[]> {
-        return this.restaurantsService.findAll();
+    async getAllRestaurants(
+        @Query()
+        query: ExpressQuery
+    ): Promise<Restaurant[]> {
+        return this.restaurantsService.findAll(query);
     }
 
     @Post()
     async createRestaurant(
         @Body()
-        restaurant: createRestaurantDto,
+        restaurant: CreateRestaurantDto,
     ): Promise<Restaurant> {
         return this.restaurantsService.create(restaurant);
     }
@@ -28,4 +32,31 @@ export class RestaurantsController {
     ): Promise<Restaurant> {
         return this.restaurantsService.findById(id);
     }
+
+    @Put(':id')
+    async updateRestaurant(
+        @Param('id')
+        id: string,
+        @Body()
+        restaurant: UpdateRestaurantDto
+    ): Promise<Restaurant> {
+        await this.restaurantsService.findById(id);
+        return this.restaurantsService.updateById(id, restaurant);
+    }
+
+    @Delete(':id')
+    async deleteRestaurant(
+        @Param('id')
+        id: string): Promise<{ deleted: Boolean }> {
+        await this.restaurantsService.findById(id);
+        const restaurant = this.restaurantsService.deleteById(id);
+        if (restaurant) {
+            return {
+                deleted: true
+            }
+        }
+    }
+
+
+
 }

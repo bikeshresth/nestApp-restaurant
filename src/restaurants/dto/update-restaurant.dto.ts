@@ -1,30 +1,31 @@
-import { IsNotEmpty } from "class-validator"
-import { IsEmail, IsEnum, IsPhoneNumber, IsString } from "class-validator/types/decorator/decorators"
+import { IsString } from "class-validator"
+import { IsEmail, IsEnum, IsOptional, IsPhoneNumber } from "class-validator/types/decorator/decorators"
 import { ERROR_VALIDATION_MSG } from "src/constants/constant"
 import { Category } from "../schemas/restaurants.schema"
 
-export class CreateRestaurantDto {
-    @IsNotEmpty()
+export class UpdateRestaurantDto {
+
     @IsString()
+    @IsOptional()
     readonly name: string
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     readonly description: string
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsEmail({}, { message: ERROR_VALIDATION_MSG.ENTER_CORRECT_EMAIL_ADDRESS })
     readonly email: string
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsPhoneNumber()
     readonly phoneNo: number
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     readonly address: string
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsEnum(Category, { message: ERROR_VALIDATION_MSG.ENTER_CORRECT_CATEGORY })
     readonly category: Category
 }
