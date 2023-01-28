@@ -11,7 +11,7 @@ import { ConfigModule } from '@nestjs/config';
       isGlobal: true,
     }),
     RestaurantsModule,
-    MongooseModule.forRoot(process.env.DB_URI_LOCAL)
+    MongooseModule.forRoot('mongodb://localhost:27017/restaurants')
   ],
   controllers: [AppController],
   providers: [AppService],

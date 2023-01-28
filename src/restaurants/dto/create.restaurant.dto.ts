@@ -1,5 +1,5 @@
 import { IsNotEmpty } from "class-validator"
-import { IsEmail, IsEnum, IsPhoneNumber, IsString } from "class-validator/types/decorator/decorators"
+import { IsEmail, IsEnum, IsPhoneNumber, IsString } from "class-validator"
 import { ERROR_VALIDATION_MSG } from "src/constants/constant"
 import { Category } from "../schemas/restaurants.schema"
 

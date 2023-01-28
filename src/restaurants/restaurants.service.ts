@@ -16,7 +16,7 @@ export class RestaurantsService {
     //Get all Restaurants => Get Restaurants
 
     async findAll(query: Query): Promise<Restaurant[]> {
-        const resPerPage = 2;
+        const resPerPage = 5;
         const currentPage = Number(query.page) || 1;
         const skip = resPerPage * (currentPage - 1)
         const keyword = query.keyword ? {
