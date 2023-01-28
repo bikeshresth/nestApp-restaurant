@@ -1,10 +1,7 @@
 import { Schema, Prop, SchemaFactory } from "@nestjs/mongoose";
+import { Category } from "src/constants/constant";
 
-export enum Category {
-    FAST_FOOD = "Fast Food",
-    CAFE = "Cafe",
-    FINE_DINING = "Fine Dining"
-}
+
 
 
 @Schema()
@@ -33,3 +30,5 @@ export class Restaurant {
 }
 
 export const RestaurantSchema = SchemaFactory.createForClass(Restaurant)
+
+export { Category };
