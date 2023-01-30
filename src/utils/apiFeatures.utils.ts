@@ -37,10 +37,13 @@ export default class APIFeatures {
 
     //upload images in s3
     static async upload(files) {
+
         return new Promise((resolve, reject) => {
             const s3 = new S3({
                 accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-                secretAccessKey: process.env.AWS_SECRET_KEY
+
+                secretAccessKey: process.env.AWS_SECRET_KEY,
+
             })
 
             let image = []
@@ -48,8 +51,10 @@ export default class APIFeatures {
                 const splitFile = file.originalname.split('.');
                 const random = Date.now()
                 const fileName = `${splitFile[0]}_${random}.${splitFile[1]}`
+                console.log(process.env.AWS_S3_BUCKET_NAME);
+
                 const params = {
-                    Bucket: `${process.env.AWS_S3_BUCKET_NAME}/restaurants`,
+                    Bucket: `${process.env.AWS_S3_BUCKET_NAME}/rest`,
                     Key: fileName,
                     Body: file.buffer
                 }
