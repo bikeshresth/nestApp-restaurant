@@ -66,4 +66,11 @@ export class RestaurantsService {
     async deleteById(id: string): Promise<Restaurant> {
         return await this.restaurantModel.findByIdAndDelete(id);
     }
+
+    //upload images in s3 => PUT restaurants/upload/:id/
+    async uploadImages(id, files) {
+        const images = await APIFeatures.upload(files);
+        console.log(images)
+        return images
+    }
 }
