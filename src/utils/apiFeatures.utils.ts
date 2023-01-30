@@ -1,3 +1,7 @@
+import { BadRequestException } from "@nestjs/common"
+import { ERROR_MSG } from "src/constants/constant"
+import { Location } from "src/restaurants/schemas/restaurants.schema"
+
 
 const nodeGeoCoder = require('node-geocoder')
 export default class APIFeatures {
@@ -12,7 +16,7 @@ export default class APIFeatures {
 
             const geocoder = nodeGeoCoder(options)
             const loc = await geocoder.geocode(address)
-            const location = {
+            const location: Location = {
                 type: 'Point',
                 coordinates: [loc[0].longitude, loc[0].latitude],
                 formattedAddress: loc[0].formattedAddress,
@@ -24,7 +28,7 @@ export default class APIFeatures {
             }
             return location;
         } catch (error) {
-            console.log(error.message)
+            throw new BadRequestException(ERROR_MSG.LOCATION_NOT_FOUND)
         }
 
 

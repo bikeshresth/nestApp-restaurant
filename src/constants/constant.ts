@@ -1,6 +1,7 @@
 export const ERROR_MSG = {
     RESTAURANT_NOT_FOUND: "Restaurant Not Found",
-    MONGOOSE_ID_ERROR: "Wrong Mongoose ID Error. Please enter a valid one."
+    MONGOOSE_ID_ERROR: "Wrong Mongoose ID Error. Please enter a valid one.",
+    LOCATION_NOT_FOUND: "Location not Found"
 }
 
 export const ERROR_VALIDATION_MSG = {
