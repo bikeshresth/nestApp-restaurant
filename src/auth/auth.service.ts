@@ -38,7 +38,7 @@ export class AuthService {
         }
     }
 
-    async login(loginDto: LoginDto): Promise<{ token: string }> {
+    async login(loginDto: LoginDto): Promise<{ access_token: string }> {
         const { email, password } = loginDto;
         const user = await this.userModel.findOne({ email }).select('+password')
         if (!user) {
@@ -50,8 +50,8 @@ export class AuthService {
             throw new UnauthorizedException(ERROR_MSG.INVALID_CREDENTIALS)
         }
 
-        const token = await APIFeatures.assignJwtToken(user, this.jwtService)
+        const access_token = await APIFeatures.assignJwtToken(user, this.jwtService)
 
-        return { token };
+        return { access_token };
     }
 }
