@@ -1,5 +1,7 @@
 import { BadRequestException } from "@nestjs/common"
+import { JwtService } from "@nestjs/jwt/dist"
 import { S3 } from "aws-sdk"
+import { LoginDto } from "src/auth/dto/login.dto"
 import { ERROR_MSG } from "src/constants/constant"
 import { Location } from "src/restaurants/schemas/restaurants.schema"
 
@@ -99,5 +101,16 @@ export default class APIFeatures {
                 }
             })
         })
+    }
+
+    static async assignJwtToken(
+        user: LoginDto,
+        jwtService: JwtService,
+    ): Promise<string> {
+
+        const payload = { user }
+        const token = await jwtService.sign(payload)
+
+        return token
     }
 }

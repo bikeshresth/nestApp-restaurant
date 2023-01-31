@@ -6,12 +6,15 @@ import { User } from './schemas/user.schema';
 import * as bcrypt from 'bcryptjs'
 import { ERROR_MSG } from 'src/constants/constant';
 import { LoginDto } from './dto/login.dto';
+import APIFeatures from 'src/utils/apiFeatures.utils';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
     constructor(
         @InjectModel(User.name)
-        private userModel: Model<User>) { }
+        private userModel: Model<User>,
+        private jwtService: JwtService) { }
 
 
     //Register User
@@ -25,8 +28,8 @@ export class AuthService {
                 { name, email, password: hashedPassword }
             )
 
+            return user
 
-            return user;
         } catch (error) {
             //Handle Duplicate error 
             if (error.code === 11000) {
@@ -35,7 +38,7 @@ export class AuthService {
         }
     }
 
-    async login(loginDto: LoginDto): Promise<User> {
+    async login(loginDto: LoginDto): Promise<{ token: string }> {
         const { email, password } = loginDto;
         const user = await this.userModel.findOne({ email }).select('+password')
         if (!user) {
@@ -47,6 +50,8 @@ export class AuthService {
             throw new UnauthorizedException(ERROR_MSG.INVALID_CREDENTIALS)
         }
 
-        return user;
+        const token = await APIFeatures.assignJwtToken(user, this.jwtService)
+
+        return { token };
     }
 }
