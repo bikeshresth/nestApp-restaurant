@@ -81,7 +81,7 @@ export class RestaurantsService {
 
     async deleteImages(images) {
         if (images.length === 0) {
-            return true
+            return true;
         }
         const res = await APIFeatures.deleteImages(images);
         return res;

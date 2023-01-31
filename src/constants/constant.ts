@@ -1,7 +1,8 @@
 export const ERROR_MSG = {
     RESTAURANT_NOT_FOUND: "Restaurant Not Found",
     MONGOOSE_ID_ERROR: "Wrong Mongoose ID Error. Please enter a valid one.",
-    LOCATION_NOT_FOUND: "Location not Found"
+    LOCATION_NOT_FOUND: "Location not Found",
+    DUPLICATE_EMAIL: "Duplicate email entered"
 }
 
 export const ERROR_VALIDATION_MSG = {
@@ -9,8 +10,3 @@ export const ERROR_VALIDATION_MSG = {
     ENTER_CORRECT_CATEGORY: 'Please Enter Correct Category'
 }
 
-export enum Category {
-    FAST_FOOD = "Fast Food",
-    CAFE = "Cafe",
-    FINE_DINING = "Fine Dining"
-}

@@ -78,7 +78,6 @@ export default class APIFeatures {
             return {
                 Key: image.Key
             }
-            console.log(imagesKeys);
 
 
         })

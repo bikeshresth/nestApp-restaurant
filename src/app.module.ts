@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { RestaurantsModule } from './restaurants/restaurants.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
+import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -11,7 +12,8 @@ import { ConfigModule } from '@nestjs/config';
       isGlobal: true,
     }),
     RestaurantsModule,
-    MongooseModule.forRoot(process.env.DB_URI_LOCAL)
+    MongooseModule.forRoot(process.env.DB_URI_LOCAL),
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,5 +1,5 @@
 import { Schema, Prop, SchemaFactory } from "@nestjs/mongoose";
-import { Category } from "src/constants/constant";
+import { Category } from "src/constants/enum";
 
 @Schema()
 export class Location {
