@@ -50,14 +50,21 @@ export class RestaurantsController {
     async deleteRestaurant(
         @Param('id')
         id: string): Promise<{ deleted: Boolean }> {
-        await this.restaurantsService.findById(id);
-        const restaurant = this.restaurantsService.deleteById(id);
-        if (restaurant) {
+        const rest = await this.restaurantsService.findById(id);
+        const isDeleted = await this.restaurantsService.deleteImages(rest.images)
+
+        if (isDeleted) {
+            this.restaurantsService.deleteById(id);
             return {
                 deleted: true
             }
+        } else {
+            return {
+                deleted: false
+            }
         }
     }
+
 
     @Put('upload/:id')
     @UseInterceptors(FilesInterceptor('files'))

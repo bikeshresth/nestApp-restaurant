@@ -70,7 +70,20 @@ export class RestaurantsService {
     //upload images in s3 => PUT restaurants/upload/:id/
     async uploadImages(id, files) {
         const images = await APIFeatures.upload(files);
-        console.log(images)
-        return images
+        const restaurant = await this.restaurantModel.findById(id, {
+            images: images as Object[],
+        }, {
+            new: true,
+            runValidators: true
+        })
+        return restaurant;
+    }
+
+    async deleteImages(images) {
+        if (images.length === 0) {
+            return true
+        }
+        const res = await APIFeatures.deleteImages(images);
+        return res;
     }
 }

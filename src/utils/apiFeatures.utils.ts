@@ -46,13 +46,11 @@ export default class APIFeatures {
 
             })
 
-            let image = []
-            files.forEach(async (file) => {
+            let images = []
+            files?.forEach(async (file) => {
                 const splitFile = file.originalname.split('.');
                 const random = Date.now()
                 const fileName = `${splitFile[0]}_${random}.${splitFile[1]}`
-                console.log(process.env.AWS_S3_BUCKET_NAME);
-
                 const params = {
                     Bucket: `${process.env.AWS_S3_BUCKET_NAME}/rest`,
                     Key: fileName,
@@ -60,11 +58,47 @@ export default class APIFeatures {
                 }
 
                 const uploadResponse = await s3.upload(params).promise();
-                image.push(uploadResponse);
-                if (image.length == file.length) {
-                    resolve(image)
+                images.push(uploadResponse);
+                if (images.length == file.length) {
+                    resolve(images)
                 }
             });
+        })
+    }
+
+    //delete images in s3
+    static async deleteImages(images) {
+        const s3 = new S3({
+            accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+
+            secretAccessKey: process.env.AWS_SECRET_KEY,
+        })
+
+        let imagesKeys = images.map((image) => {
+            return {
+                Key: image.Key
+            }
+            console.log(imagesKeys);
+
+
+        })
+        const params = {
+            Bucket: `${process.env.AWS_S3_BUCKET_NAME}`,
+            Delete: {
+                Objects: imagesKeys,
+                Quiet: false
+            }
+        }
+
+        return new Promise((resolve, reject) => {
+            s3.deleteObjects(params, function (err, data) {
+                if (err) {
+                    console.log(err);
+                    reject(false)
+                } else {
+                    resolve(true)
+                }
+            })
         })
     }
 }
