@@ -8,6 +8,7 @@ import { ERROR_MSG } from 'src/constants/constant';
 import { LoginDto } from './dto/login.dto';
 import APIFeatures from 'src/utils/apiFeatures.utils';
 import { JwtService } from '@nestjs/jwt';
+import { Query } from 'express-serve-static-core';
 
 @Injectable()
 export class AuthService {
@@ -38,7 +39,7 @@ export class AuthService {
         }
     }
 
-    async login(loginDto: LoginDto): Promise<{ access_token: string }> {
+    async login(loginDto: LoginDto): Promise<{ token: string }> {
         const { email, password } = loginDto;
         const user = await this.userModel.findOne({ email }).select('+password')
         if (!user) {
@@ -50,8 +51,25 @@ export class AuthService {
             throw new UnauthorizedException(ERROR_MSG.INVALID_CREDENTIALS)
         }
 
-        const access_token = await APIFeatures.assignJwtToken(user, this.jwtService)
+        const token = await APIFeatures.assignJwtToken(user, this.jwtService)
 
-        return { access_token };
+        return { token };
+    }
+
+    //Get all Restaurants => Get Restaurants
+
+    async findAll(query: Query): Promise<User[]> {
+        const resPerPage = 5;
+        const currentPage = Number(query.page) || 1;
+        const skip = resPerPage * (currentPage - 1)
+        const keyword = query.keyword ? {
+            name: {
+                $regex: query.keyword,
+                $options: 'i'
+            }
+        } : {}
+        const user = await this.userModel.find({ ...keyword }).limit(resPerPage).skip(skip);
+        return user;
+
     }
 }
