@@ -4,7 +4,8 @@ export const ERROR_MSG = {
     LOCATION_NOT_FOUND: "Location not Found",
     DUPLICATE_EMAIL: "Duplicate email entered",
     USER_NOT_FOUND: "User cannot be identified",
-    INVALID_CREDENTIALS: "Password do not match"
+    INVALID_CREDENTIALS: "Password do not match",
+    LOGIN_ERR: "Please Login first."
 }
 
 export const ERROR_VALIDATION_MSG = {

@@ -24,7 +24,7 @@ export class RestaurantsService {
         const keyword = query.keyword ? {
             name: {
                 $regex: query.keyword,
-                $options: 'i'
+                $options: 'i' // i denotes case insensitive
             }
         } : {}
         const restaurants = await this.restaurantModel.find({ ...keyword }).limit(resPerPage).skip(skip);
@@ -34,9 +34,8 @@ export class RestaurantsService {
 
     //Create new  Restaurants => POST Restaurants
     async create(restaurant: Restaurant, user: User): Promise<Restaurant> {
-        const location = await APIFeatures.getRestaurantLocation(restaurant.address)
-        console.log(location)
-        const data = Object.assign(restaurant, { user: user._id, location })
+        // const location = await APIFeatures.getRestaurantLocation(restaurant.address)
+        const data = Object.assign(restaurant, { user: user._id })
         const res = await this.restaurantModel.create(data);
         return res;
     }

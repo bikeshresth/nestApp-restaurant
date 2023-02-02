@@ -8,6 +8,8 @@ import { FilesInterceptor } from '@nestjs/platform-express';
 import { AuthGuard } from '@nestjs/passport';
 import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
 import { User } from 'src/auth/schemas/user.schema';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { Roles } from 'src/auth/decorators/roles.decorator';
 
 @Controller('restaurants')
 export class RestaurantsController {
@@ -23,7 +25,8 @@ export class RestaurantsController {
     }
 
     @Post()
-    @UseGuards(AuthGuard())
+    @UseGuards(AuthGuard(), RolesGuard)
+    @Roles('admin', 'user')
     async createRestaurant(
         @Body()
         restaurant: CreateRestaurantDto,

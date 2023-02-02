@@ -43,8 +43,6 @@ export class Restaurant {
     @Prop()
     images?: object[] //? Represent optional field
 
-    @Prop({ type: Object, ref: 'Location' })
-    location?: Location;
 
     @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'user' })
     user: User
