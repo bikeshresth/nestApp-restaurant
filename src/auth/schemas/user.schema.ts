@@ -3,7 +3,7 @@ import { Document } from "mongoose";
 import { ERROR_MSG } from "src/constants/constant";
 import { UserRoles } from "src/constants/enum";
 
-@Schema()
+@Schema({ timestamps: true })
 export class User extends Document {
     @Prop()
     name: string;

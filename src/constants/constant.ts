@@ -10,6 +10,7 @@ export const ERROR_MSG = {
 
 export const ERROR_VALIDATION_MSG = {
     ENTER_CORRECT_EMAIL_ADDRESS: 'Please Enter Correct Email Address',
-    ENTER_CORRECT_CATEGORY: 'Please Enter Correct Category'
+    ENTER_CORRECT_CATEGORY: 'Please Enter Correct Category',
+    MEAL_FORBIDDNE_MSG: "You cannot add meal to the restaurant."
 }
 

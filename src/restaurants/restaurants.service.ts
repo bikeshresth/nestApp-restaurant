@@ -35,7 +35,7 @@ export class RestaurantsService {
     //Create new  Restaurants => POST Restaurants
     async create(restaurant: Restaurant, user: User): Promise<Restaurant> {
         // const location = await APIFeatures.getRestaurantLocation(restaurant.address)
-        const data = Object.assign(restaurant, { user: user._id })
+        const data = Object.assign(restaurant, { user: user?.id })
         const res = await this.restaurantModel.create(data);
         return res;
     }

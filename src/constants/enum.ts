@@ -5,6 +5,13 @@ export enum Category {
 }
 
 export enum UserRoles {
-    ADMIN = "Admin",
-    USER = "User",
+    ADMIN = "admin",
+    USER = "user",
+}
+
+export enum MealCategory {
+    SOUPS = "Soups",
+    SALADS = 'Salads',
+    SANDWICHES = 'Sandwiches',
+    PASTA = 'Pasta'
 }
