@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { Panorama } from 'aws-sdk';
 import { get } from 'http';
-import { Book } from './book.entity';
+import { BookEntity } from './book.entity';
 import { BooksService } from './books.service';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
@@ -25,7 +25,7 @@ export class BooksController {
     async findById(
         @Param('id')
         id: string
-    ): Promise<Book> {
+    ): Promise<BookEntity> {
         return await this.booksService.findOne(id)
     }
 
@@ -35,7 +35,7 @@ export class BooksController {
         id: string,
         @Body()
         body: UpdateBookDto
-    ): Promise<Book> {
+    ): Promise<BookEntity> {
         return this.booksService.update(id, body)
     }
 
@@ -44,7 +44,7 @@ export class BooksController {
     async deleteBook(
         @Param('id')
         id: string,
-    ): Promise<Book> {
+    ): Promise<BookEntity> {
         return this.booksService.remove(id)
     }
 }

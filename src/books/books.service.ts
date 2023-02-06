@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Book } from './book.entity';
+import { BookEntity } from './book.entity';
 import { Repository } from "typeorm";
 import { create } from 'domain';
 import { ERROR_MSG } from 'src/constants/constant';
@@ -8,17 +8,17 @@ import { ERROR_MSG } from 'src/constants/constant';
 @Injectable()
 export class BooksService {
     constructor(
-        @InjectRepository(Book)
-        private bookModel: Repository<Book>
+        @InjectRepository(BookEntity)
+        private bookModel: Repository<BookEntity>
     ) { }
 
 
-    async findAll(): Promise<Book[]> {
+    async findAll(): Promise<BookEntity[]> {
         return await this.bookModel.find()
     }
 
 
-    create(book: Book): Promise<Book> {
+    create(book: BookEntity): Promise<BookEntity> {
 
         const bookObj = this.bookModel.create({
             name: book.name,
@@ -28,7 +28,7 @@ export class BooksService {
         return this.bookModel.save(bookObj)
     }
 
-    async findOne(id: string): Promise<Book> {
+    async findOne(id: string): Promise<BookEntity> {
         const book = await this.bookModel.findOneBy({ id });
 
         if (!book) {
@@ -38,7 +38,7 @@ export class BooksService {
         return book
     }
 
-    async update(id: string, body: Book): Promise<Book> {
+    async update(id: string, body: BookEntity): Promise<BookEntity> {
         const book = await this.bookModel.findOneBy({ id });
 
         if (!book) {
