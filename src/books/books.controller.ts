@@ -1,9 +1,10 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { Panorama } from 'aws-sdk';
 import { get } from 'http';
 import { Book } from './book.entity';
 import { BooksService } from './books.service';
 import { CreateBookDto } from './dto/create-book.dto';
+import { UpdateBookDto } from './dto/update-book.dto';
 
 @Controller('books')
 export class BooksController {
@@ -26,5 +27,15 @@ export class BooksController {
         id: string
     ): Promise<Book> {
         return await this.booksService.findOne(id)
+    }
+
+    @Put(':id')
+    async updateBook(
+        @Param('id')
+        id: string,
+        @Body()
+        body: UpdateBookDto
+    ): Promise<Book> {
+        return this.booksService.update(id, body)
     }
 }

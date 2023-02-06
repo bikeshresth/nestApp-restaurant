@@ -37,4 +37,15 @@ export class BooksService {
 
         return book
     }
+
+    async update(id: string, body: Book): Promise<Book> {
+        const book = await this.bookModel.findOneBy({ id });
+
+        if (!book) {
+            throw new NotFoundException(ERROR_MSG.DATA_NOT_FOUND);
+        }
+        Object.assign(book, body)
+
+        return this.bookModel.save(book)
+    }
 }
