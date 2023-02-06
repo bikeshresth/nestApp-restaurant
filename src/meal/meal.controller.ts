@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, ForbiddenException, Get, Param, Post, Put } from '@nestjs/common';
 import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
 import { User } from 'src/auth/schemas/user.schema';
 import { CreateMealDto } from './dto/create-meal.dto';
+import { UpdateMealDto } from './dto/update-meal.dto';
 import { MealService } from './meal.service';
 import { Meal } from './schemas/meal.schema';
 
@@ -38,4 +39,22 @@ export class MealController {
     ): Promise<Meal> {
         return this.mealService.findById(id)
     }
+
+    @Put(':id')
+    async updateMeal(
+        @Param('id')
+        id: string,
+        @Body()
+        updateMealDto: UpdateMealDto,
+        @CurrentUser() user: User
+    ): Promise<Meal> {
+        const meal = await this.mealService.findById(id);
+
+        if (meal.user?.toString() !== user?._id.toString()) {
+            throw new ForbiddenException("You cannot delete the information")
+        }
+
+        return this.mealService.updateById(id, updateMealDto)
+    }
+
 }

@@ -31,7 +31,7 @@ export class MealService {
     //Create a new meal = > POST /meals/:restaurants
 
     async create(meal: Meal, user: User): Promise<Meal> {
-        const data = Object.assign(meal, { user: user._id })
+        const data = Object.assign(meal, { user: user?._id })
         //Saving meal ID in the restaurant menu 
         const restaurant = await this.restaurantModel.findById(meal.restaurant)
 
@@ -40,7 +40,7 @@ export class MealService {
         }
 
         //Check ownership of the restaurant
-        if (restaurant.user.toString() !== user._id.toString()) {
+        if (restaurant.user?.toString() !== user?._id?.toString()) {
             throw new ForbiddenException(ERROR_VALIDATION_MSG.MEAL_FORBIDDNE_MSG)
         }
 
@@ -63,5 +63,15 @@ export class MealService {
             throw new NotFoundException(ERROR_MSG.MEAL_NOT_FOUND);
         }
         return meal;
+    }
+
+    //update meal => PUT/ meals/ :id
+
+    async updateById(id: string, meal: Meal): Promise<Meal> {
+        return await this.mealModel.findByIdAndUpdate(id, meal, {
+            new: true,
+            runValidators: true
+        });
+
     }
 }

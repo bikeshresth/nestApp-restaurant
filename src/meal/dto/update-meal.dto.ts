@@ -1,26 +1,26 @@
-import { IsEmpty, IsEnum, IsNotEmpty, IsNumber, IsString } from "class-validator"
+import { IsEmpty, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator"
 import { User } from "src/auth/schemas/user.schema"
 import { ERROR_VALIDATION_MSG } from "src/constants/constant"
 import { Category, MealCategory } from "src/constants/enum"
 
-export class CreateMealDto {
-    @IsNotEmpty()
+export class UpdateMealDto {
+    @IsOptional()
     @IsString()
     readonly name: string
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     readonly description: string
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsNumber()
     readonly price: number
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsEnum(MealCategory, { message: ERROR_VALIDATION_MSG.ENTER_CORRECT_CATEGORY })
     readonly category: MealCategory
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     readonly restaurant: string
 
