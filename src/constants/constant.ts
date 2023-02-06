@@ -6,7 +6,9 @@ export const ERROR_MSG = {
     USER_NOT_FOUND: "User cannot be identified",
     INVALID_CREDENTIALS: "Password do not match",
     LOGIN_ERR: "Please Login first.",
-    MEAL_NOT_FOUND: "Cannot find the meal with this ID"
+    MEAL_NOT_FOUND: "Cannot find the meal with this ID",
+    CANNOT_PROVIDE_ID: "You cannot provide the id",
+    DATA_NOT_FOUND: "Data not found"
 }
 
 export const ERROR_VALIDATION_MSG = {
