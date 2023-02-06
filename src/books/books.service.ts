@@ -48,4 +48,15 @@ export class BooksService {
 
         return this.bookModel.save(book)
     }
+
+
+    async remove(id: string) {
+        const book = await this.bookModel.findOneBy({ id });
+
+        if (!book) {
+            throw new NotFoundException(ERROR_MSG.DATA_NOT_FOUND);
+        }
+
+        return this.bookModel.remove(book);
+    }
 }

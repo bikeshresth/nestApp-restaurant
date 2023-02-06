@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { Panorama } from 'aws-sdk';
 import { get } from 'http';
 import { Book } from './book.entity';
@@ -37,5 +37,14 @@ export class BooksController {
         body: UpdateBookDto
     ): Promise<Book> {
         return this.booksService.update(id, body)
+    }
+
+
+    @Delete(':id')
+    async deleteBook(
+        @Param('id')
+        id: string,
+    ): Promise<Book> {
+        return this.booksService.remove(id)
     }
 }
