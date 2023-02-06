@@ -6,8 +6,20 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { MealModule } from './meal/meal.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { BooksModule } from './books/books.module';
 @Module({
   imports: [
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username: 'postgres',
+      password: 'root',
+      database: 'work_db',
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      synchronize: true
+    }),
     ConfigModule.forRoot({
       envFilePath: ['.env.development'],
       isGlobal: true,
@@ -15,7 +27,8 @@ import { MealModule } from './meal/meal.module';
     RestaurantsModule,
     MongooseModule.forRoot(process.env.DB_URI_LOCAL),
     AuthModule,
-    MealModule
+    MealModule,
+    BooksModule
   ],
   controllers: [AppController],
   providers: [AppService],
