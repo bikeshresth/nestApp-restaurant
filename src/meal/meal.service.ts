@@ -1,6 +1,7 @@
-import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import * as mongoose from 'mongoose';
+import { of } from 'rxjs';
 import { User } from 'src/auth/schemas/user.schema';
 import { ERROR_MSG, ERROR_VALIDATION_MSG } from 'src/constants/constant';
 import { Restaurant } from 'src/restaurants/schemas/restaurants.schema';
@@ -15,6 +16,17 @@ export class MealService {
         private restaurantModel: mongoose.Model<Restaurant>
     ) { }
 
+    // Get all meals => GET/ meals
+    async findAll(): Promise<Meal[]> {
+        const meal = await this.mealModel.find();
+        return meal
+    }
+
+    // Get all meals of restaurant => GET/ meals/ :restaurant
+    async findByRestaurant(id: string): Promise<Meal[]> {
+        const meals = await this.mealModel.find({ restaurant: id });
+        return meals
+    }
 
     //Create a new meal = > POST /meals/:restaurants
 
@@ -37,5 +49,19 @@ export class MealService {
         await restaurant.save();
 
         return mealCreated;
+    }
+
+    //Get a meal with ID => GET /meals/:id
+    async findById(id: string): Promise<Meal> {
+        const isValidId = mongoose.isValidObjectId(id);
+        if (!isValidId) {
+            throw new BadRequestException(ERROR_MSG.MONGOOSE_ID_ERROR);
+        }
+
+        const meal = await this.mealModel.findById(id);
+        if (!meal) {
+            throw new NotFoundException(ERROR_MSG.MEAL_NOT_FOUND);
+        }
+        return meal;
     }
 }
