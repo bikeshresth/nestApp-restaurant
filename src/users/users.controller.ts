@@ -12,7 +12,7 @@ export class UsersController {
         return this.userService.findAll();
     }
 
-    @Post()
+    @Post('/create')
     createUser(
         @Body() body
     ) {

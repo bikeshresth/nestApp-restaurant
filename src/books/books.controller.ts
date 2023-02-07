@@ -18,7 +18,13 @@ export class BooksController {
 
     @Post()
     createBook(@Body() body: CreateBookDto) {
-        return this.booksService.create(body)
+        const user = {
+            id: "275cf893-a844-4ea3-b467-e1e881d833f4",
+            email: "bishal@heubert.com",
+            password: "12345677"
+
+        }
+        return this.booksService.create(body, user)
     }
 
     @Get(':id')

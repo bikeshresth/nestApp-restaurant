@@ -18,12 +18,13 @@ export class BooksService {
     }
 
 
-    create(book: BookEntity): Promise<BookEntity> {
+    create(book: BookEntity, user): Promise<BookEntity> {
 
         const bookObj = this.bookModel.create({
             name: book.name,
             price: book.price,
-            author: book.author
+            author: book.author,
+            user: user.id
         })
         return this.bookModel.save(bookObj)
     }

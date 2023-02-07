@@ -20,6 +20,6 @@ export class UsersService {
             email, password
         })
 
-        return user
+        return this.userModel.save(user)
     }
 }

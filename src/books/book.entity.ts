@@ -1,5 +1,6 @@
 import { CloudFormation } from "aws-sdk";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { UserEntity } from "src/users/users.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 
 
@@ -19,4 +20,6 @@ export class BookEntity {
     @Column()
     author: string
 
+    @ManyToOne(() => UserEntity, (user) => user.books)
+    user: UserEntity
 }
