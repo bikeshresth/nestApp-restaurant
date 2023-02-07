@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { MealModule } from './meal/meal.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BooksModule } from './books/books.module';
+import { UsersModule } from './users/users.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -28,7 +29,8 @@ import { BooksModule } from './books/books.module';
     MongooseModule.forRoot(process.env.DB_URI_LOCAL),
     AuthModule,
     MealModule,
-    BooksModule
+    BooksModule,
+    UsersModule
   ],
   controllers: [AppController],
   providers: [AppService],
