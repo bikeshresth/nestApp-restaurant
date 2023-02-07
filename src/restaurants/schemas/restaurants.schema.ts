@@ -1,6 +1,6 @@
 import { Schema, Prop, SchemaFactory } from "@nestjs/mongoose";
 import * as mongoose from "mongoose";
-import { User } from "src/auth/schemas/user.schema";
+import { User } from '../../auth/schemas/user.schema'
 import { Category } from "src/constants/enum";
 import { Meal } from "src/meal/schemas/meal.schema";
 

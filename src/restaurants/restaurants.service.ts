@@ -4,8 +4,8 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Query } from 'express-serve-static-core';
 import mongoose from 'mongoose';
 import { User } from 'src/auth/schemas/user.schema';
-import { ERROR_MSG } from 'src/constants/constant';
-import APIFeatures from 'src/utils/apiFeatures.utils';
+import { ERROR_MSG } from '../constants/constant';
+import APIFeatures from '../utils/apiFeatures.utils';
 import { Restaurant } from './schemas/restaurants.schema';
 
 @Injectable()

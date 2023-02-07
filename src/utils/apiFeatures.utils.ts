@@ -2,7 +2,7 @@ import { BadRequestException } from "@nestjs/common"
 import { JwtService } from "@nestjs/jwt/dist"
 import { S3 } from "aws-sdk"
 import { LoginDto } from "src/auth/dto/login.dto"
-import { ERROR_MSG } from "src/constants/constant"
+import { ERROR_MSG } from "../constants/constant"
 import { Location } from "src/restaurants/schemas/restaurants.schema"
 
 
