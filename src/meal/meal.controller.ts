@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, ForbiddenException, Get, Param, Post, Put } from '@nestjs/common';
-import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
-import { User } from 'src/auth/schemas/user.schema';
+import { CurrentUser } from '../auth/decorators/current-user.decorator';
+import { User } from '../auth/schemas/user.schema';
 import { CreateMealDto } from './dto/create-meal.dto';
 import { UpdateMealDto } from './dto/update-meal.dto';
 import { MealService } from './meal.service';
