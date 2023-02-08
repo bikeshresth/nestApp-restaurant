@@ -1,5 +1,5 @@
-import { CloudFormation } from "aws-sdk";
-import { UserEntity } from "src/users/users.entity";
+
+import { UserEntity } from "../users/users.entity";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 @Entity()
 export class BookEntity {

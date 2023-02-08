@@ -1,6 +1,6 @@
 import { IsEmpty, IsNotEmpty, IsNumber, IsString } from "class-validator";
-import { ERROR_MSG } from "src/constants/constant";
-import { UserEntity } from "src/users/users.entity";
+import { ERROR_MSG } from "../../constants/constant";
+import { UserEntity } from "../../users/users.entity";
 
 export class CreateBookDto {
 

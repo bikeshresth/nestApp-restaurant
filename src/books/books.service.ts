@@ -2,8 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BookEntity } from './book.entity';
 import { Repository } from "typeorm";
-import { create } from 'domain';
-import { ERROR_MSG } from 'src/constants/constant';
+import { ERROR_MSG } from '../constants/constant';
 
 @Injectable()
 export class BooksService {

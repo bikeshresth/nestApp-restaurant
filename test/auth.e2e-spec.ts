@@ -36,7 +36,17 @@ describe('AuthController (e2e)', () => {
             .send(user)
             .expect(201)
             .then((res) => {
-                expect(res.body.token).toBeDefined()
+                expect(res?.body?.token)?.toBeDefined();
+            })
+    });
+
+    it('/ (GET) - LOGIN user', () => {
+        return request(app.getHttpServer())
+            .get('/auth/login')
+            .send({ email: user.email, password: user.password })
+            .expect(200)
+            .then((res) => {
+                expect(res.body.token)?.toBeDefined();
             })
     });
 });

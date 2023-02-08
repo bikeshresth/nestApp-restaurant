@@ -1,10 +1,9 @@
 import { BadRequestException, ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import * as mongoose from 'mongoose';
-import { of } from 'rxjs';
-import { User } from 'src/auth/schemas/user.schema';
-import { ERROR_MSG, ERROR_VALIDATION_MSG } from 'src/constants/constant';
-import { Restaurant } from 'src/restaurants/schemas/restaurants.schema';
+import { User } from '../auth/schemas/user.schema';
+import { ERROR_MSG, ERROR_VALIDATION_MSG } from '../constants/constant';
+import { Restaurant } from '../restaurants/schemas/restaurants.schema';
 import { Meal } from './schemas/meal.schema';
 
 @Injectable()

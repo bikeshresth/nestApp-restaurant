@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import * as mongoose from "mongoose";
-import { User } from "src/auth/schemas/user.schema";
-import { MealCategory } from "src/constants/enum";
+import { User } from "../../auth/schemas/user.schema";
+import { MealCategory } from "../../constants/enum";
 
 @Schema({
     timestamps: true
