@@ -1,6 +1,6 @@
 import { IsEmail, IsEmpty, IsEnum, IsOptional, IsPhoneNumber, IsString } from "class-validator"
-import { User } from "src/auth/schemas/user.schema"
-import { ERROR_VALIDATION_MSG } from "src/constants/constant"
+import { User } from "../../auth/schemas/user.schema"
+import { ERROR_VALIDATION_MSG } from "../../constants/constant"
 import { Category } from "../schemas/restaurants.schema"
 
 export class UpdateRestaurantDto {
