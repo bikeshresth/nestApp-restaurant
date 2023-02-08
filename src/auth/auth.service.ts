@@ -6,7 +6,7 @@ import { User } from './schemas/user.schema';
 import * as bcrypt from 'bcryptjs'
 import { ERROR_MSG } from '../constants/constant';
 import { LoginDto } from './dto/login.dto';
-import APIFeatures from 'src/utils/apiFeatures.utils';
+import APIFeatures from '../utils/apiFeatures.utils';
 import { JwtService } from '@nestjs/jwt';
 import { Query } from 'express-serve-static-core';
 

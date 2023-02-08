@@ -1,5 +1,5 @@
-import { IsEmail, IsNotEmpty, IsString, MinLength } from "class-validator";
-import { ERROR_VALIDATION_MSG } from "src/constants/constant";
+import { IsEmail, IsNotEmpty, IsString } from "class-validator";
+import { ERROR_VALIDATION_MSG } from "../../constants/constant";
 
 export class LoginDto {
     @IsNotEmpty()
