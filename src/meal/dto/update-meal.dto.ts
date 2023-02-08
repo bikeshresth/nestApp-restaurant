@@ -1,7 +1,7 @@
 import { IsEmpty, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator"
-import { User } from "src/auth/schemas/user.schema"
-import { ERROR_VALIDATION_MSG } from "src/constants/constant"
-import { Category, MealCategory } from "src/constants/enum"
+import { User } from "../../auth/schemas/user.schema"
+import { ERROR_VALIDATION_MSG } from "../../constants/constant"
+import { Category, MealCategory } from "../../constants/enum"
 
 export class UpdateMealDto {
     @IsOptional()
