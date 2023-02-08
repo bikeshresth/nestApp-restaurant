@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 import { SignUpDto } from './dto/signup.dto';
 import { User } from './schemas/user.schema';
 import * as bcrypt from 'bcryptjs'
-import { ERROR_MSG } from 'src/constants/constant';
+import { ERROR_MSG } from '../constants/constant';
 import { LoginDto } from './dto/login.dto';
 import APIFeatures from 'src/utils/apiFeatures.utils';
 import { JwtService } from '@nestjs/jwt';

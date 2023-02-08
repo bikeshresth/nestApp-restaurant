@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document } from "mongoose";
-import { ERROR_MSG } from "src/constants/constant";
-import { UserRoles } from "src/constants/enum";
+import { ERROR_MSG } from "../../constants/constant";
+import { UserRoles } from "../../constants/enum";
 
 @Schema({ timestamps: true })
 export class User extends Document {
