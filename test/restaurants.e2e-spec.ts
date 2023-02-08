@@ -45,6 +45,8 @@ describe('AuthController (e2e)', () => {
     });
 
     let jwtToken;
+    let restaurantCreate;
+
     it('/ (GET) - LOGIN user', () => {
         return request(app.getHttpServer())
             .get('/auth/login')
@@ -64,6 +66,27 @@ describe('AuthController (e2e)', () => {
             .then((res) => {
                 expect(res?.body?._id)?.toBeDefined();
                 expect(res?.body?.name)?.toEqual(newRestaurant.name);
+                restaurantCreate = res.body
+            })
+    });
+
+    it('/ (GET) - Get all Restaraunts', () => {
+        return request(app.getHttpServer())
+            .get('/restaurants')
+            .expect(200)
+            .then((res) => {
+                expect(res.body.length)?.toBe(1);
+            })
+    });
+
+    it('/ (GET) - Get restaurant by ID', () => {
+        return request(app.getHttpServer())
+            .get(`/restaurants/${restaurantCreate._id}`)
+            .send({ email: user.email, password: user.password })
+            .expect(200)
+            .then((res) => {
+                expect(res.body)?.toBeDefined();
+                expect(res.body._id).toEqual(restaurantCreate._id)
             })
     });
 });
